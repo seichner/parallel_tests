@@ -8,7 +8,8 @@ module ParallelTests
         if path_or_io.respond_to?(:write)
           path_or_io
         else # its a path
-          File.open(path_or_io, 'w').close # clean out the file
+          #File.open(path_or_io, 'w').close # clean out the file
+          Kernel.puts "not opening a new file (in gherkin)"
           file = File.open(path_or_io, 'a')
 
           at_exit do
