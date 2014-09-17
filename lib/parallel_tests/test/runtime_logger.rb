@@ -10,11 +10,11 @@ module ParallelTests
         def log(test, start_time, end_time)
           return if test.is_a? ::Test::Unit::TestSuite # don't log for suites-of-suites
 
-          #if !@@has_started # make empty log file
-          #  File.open(logfile, 'w'){}
+          if !@@has_started # make empty log file
+            File.open(logfile, 'w'){}
           Kernel.puts "not opening new logger file (in test)"
             @@has_started = true
-          #end
+          end
 
           locked_appending_to(logfile) do |file|
             file.puts(message(test, start_time, end_time))
