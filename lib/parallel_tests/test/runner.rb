@@ -135,7 +135,9 @@ module ParallelTests
           lines = File.read(log).split("\n") rescue []
 
           # use recorded test runtime if we got enough data
+          Kernel.puts "checking size #{lines.size * 1.5} > #{tests.size}"
           if lines.size * 1.5 > tests.size
+            Kernel.puts "sorting by last runtime"
             puts "Using recorded test runtime: #{log}"
             times = Hash.new(1)
             lines.each do |line|
@@ -145,6 +147,7 @@ module ParallelTests
             end
             tests.sort.map{|test| [test, times[File.expand_path(test)]] }
           else # use file sizes
+            Kernel.puts "sorting by filesize"
             with_filesize_info(tests)
           end
         end
